@@ -12,8 +12,13 @@ function AppViewModel() {
             success: function(data) {
                 console.log(data);
                 self.ids([]);
-                for (i in data.ids) {
-                    self.ids.push(data.ids[i]);
+                var length = data.ids.length;
+                for (var i = 0; i < length; i++) {
+                    var id_result = '';
+                    if (i != 0)
+                      id_result += ' ';
+                    id_result += data.ids[i];
+                    self.ids.push(id_result);
                 }
             }
         });
@@ -36,7 +41,7 @@ function AppViewModel() {
       if (self.ids().length == 0)
         return "";
       strInput = self.ids().toString();
-      result = strInput.replace(/,/g, "@samsung.com; ");
+      result = strInput.replace(/,/g, "@samsung.com;");
       result += "@samsung.com";
       return result;
     });
@@ -59,7 +64,7 @@ function AppViewModel() {
     self.chatGroupLink = ko.computed(function() {
       if (self.ids().length == 0)
         return "";
-      arrayOfMem = self.ids().toString().split(",");
+      arrayOfMem = self.ids().toString().split(", ");
       result = "mysingleim://";
       for (i = 0; i < arrayOfMem.length; i++) {
           result += arrayOfMem[i];
